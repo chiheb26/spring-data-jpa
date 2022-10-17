@@ -3,6 +3,7 @@ package com.global.hr.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,8 +12,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="hr_department")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Department {
 	
 	@Id
@@ -24,8 +29,11 @@ public class Department {
 	private Long id;
 	private String name;
 	
-	@OneToMany(mappedBy="department")
-	private List<Employee> employees;
+	
+	  @OneToMany(mappedBy="department" , fetch=FetchType.LAZY)
+	  //@JsonIgnore
+	  private List<Employee> employees;
+	 
 	
 	public Long getId() {
 		return id;
@@ -39,12 +47,10 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
+	/*
+	 * public List<Employee> getEmployees() { return employees; } public void
+	 * setEmployees(List<Employee> employees) { this.employees = employees; }
+	 */
 	
 	
 }
