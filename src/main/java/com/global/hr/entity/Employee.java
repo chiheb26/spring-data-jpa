@@ -57,6 +57,16 @@ public class Employee {
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	public Employee() {
+	
+	}
+	
+	public Employee(Long id, String name, Double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+	}
 	public Long getId() {
 		return id;
 	}

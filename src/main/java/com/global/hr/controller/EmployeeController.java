@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.global.hr.entity.Employee;
 import com.global.hr.entity.EmployeeResponse;
 import com.global.hr.entity.HRStatisticProjection;
+import com.global.hr.projection.EmployeeProjection;
 import com.global.hr.service.EmployeeService;
 
 @RestController
@@ -76,7 +77,7 @@ public class EmployeeController {
 	
 	@GetMapping("/filter-sorted")
 	
-	public List<Employee> filterByNameSorted(@Param("empName") String name,
+	public List<EmployeeProjection> filterByNameSorted(@Param("empName") String name,
 			@Param("sortCol") String sortCol,@Param("direction") Boolean isAsc){
 		return employeeService.filterByNameSorted(name,sortCol,isAsc);
 

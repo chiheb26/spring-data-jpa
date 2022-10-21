@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.global.hr.entity.Department;
 import com.global.hr.entity.Employee;
 import com.global.hr.entity.HRStatisticProjection;
+import com.global.hr.projection.EmployeeProjection;
 import com.global.hr.repository.DepartmentRepo;
 import com.global.hr.repository.EmployeeRepo;
 
@@ -37,7 +38,7 @@ public class EmployeeService {
 		return employeeRepo.filterByName(name);
 
 	}
-	public List<Employee> filterByNameSorted(String name,String sortCol,Boolean isAsc){
+	public List<EmployeeProjection> filterByNameSorted(String name,String sortCol,Boolean isAsc){
 		return employeeRepo.filterByNameSorted(name,Sort.by(isAsc?Direction.ASC:Direction.DESC,sortCol));
 
 	}

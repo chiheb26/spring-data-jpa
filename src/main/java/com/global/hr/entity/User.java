@@ -45,7 +45,9 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
+	public void addRole(Role role) {
+		roles.add(role);
+	}
 	public Long getId() {
 		return id;
 	}

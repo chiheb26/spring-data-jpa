@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.global.hr.entity.Employee;
 import com.global.hr.entity.HRStatisticProjection;
+import com.global.hr.projection.EmployeeProjection;
 
 @Repository
 public interface EmployeeRepo extends JpaRepository<Employee, Long> {
@@ -39,8 +40,10 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	@Query("select emp from Employee emp where emp.name like %:empName%")
 	List<Employee> filterByName(@Param("empName") String name);
 	@Query("select emp from Employee emp where emp.name like %:empName%")
-	List<Employee> filterByNameSorted(@Param("empName") String name,Sort sort);
-	@Query("select emp from #{#entityName} emp where emp.name like %:empName%")
+	List<EmployeeProjection> filterByNameSorted(@Param("empName") String name,Sort sort);
+	//@Query("select emp from #{#entityName} emp where emp.name like %:empName%")
+	//Page<EmployeeProjection> filterByNameSortedPageable(@Param("empName") String name,Pageable pageable);
+	@Query("select new Employee(emp.id,emp.name,emp.salary) from #{#entityName} emp where emp.name like %:empName%")
 	Page<Employee> filterByNameSortedPageable(@Param("empName") String name,Pageable pageable);
 	// SQL Native
 	@Query(value="select * from hr_employees emp where emp.emp_name like :empName", nativeQuery=true)
